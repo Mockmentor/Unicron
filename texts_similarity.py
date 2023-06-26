@@ -1,24 +1,26 @@
 import pandas as pd
 from sentence_transformers import SentenceTransformer, util
+from database import get_database
+import string
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
-df = ['An array is a data structure that stores elements in contiguous memory locations, while a linked list stores elements in non-contiguous memory locations connected by pointers.',
-    'An array is a contiguous block of memory used to store elements, while a linked list is a collection of nodes that are connected via pointers.',
-    'Arrays have a fixed size, while linked lists can dynamically grow or shrink in size.',
-    'Accessing an element in an array takes constant time, while accessing an element in a linked list takes linear time.',
-    'Inserting or deleting an element in an array requires shifting all subsequent elements, while in a linked list it only requires updating pointers.']
+df = []
 
-sentences = [sentence.lower()\
-             .replace('br','')\
-             .replace('<',"")\
-             .replace(">","")\
-             .replace('\\',"")\
-             .replace('\/',"")\
-             for sentence in df]
+cursor = get_database(id=8)
+for i in cursor[2:]:
+    df.append(i)
 
-our_sentence = "elements of arrays are stored in contiguous memory cells, while elements of linked lists are stored in different cells but connected with each other by pointers."
-#our_sentence = 'Random forest is a Supervised Machine Learning Algorithm that is used widely in Classification and Regression problems. It builds decision trees ...'
+print("This is my question:\n", cursor[1])
+
+sentences = [sentence.lower().translate(str.maketrans('', '', string.punctuation))
+              for sentence in df]
+
+our_sentence = "elements of arrays are stored in contiguous memory cells, while elements of linked lists are stored in different cells, but connected with each other by pointers."
+print("This is your answer\n", our_sentence)
+
+our_sentence = our_sentence.lower().translate(str.maketrans('','',string.punctuation))
+
 
 my_embedding = model.encode(our_sentence)
 

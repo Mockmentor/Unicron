@@ -12,7 +12,7 @@ class UnicronService(unicron_pb2_grpc.UnicronServicer):
 
     def audiolize(self, request, context):
         audio = text_to_audio(request.text)
-        return unicron.AudiolizeRequest(audio=audio)
+        return unicron.AudiolizeResponse(audio=audio)
 
     def textify(self, request, context):
         text = speech_to_text(request.audio)
@@ -32,4 +32,4 @@ if __name__ == '__main__':
     try:
         server.wait_for_termination()
     except KeyboardInterrupt:
-        print('fasdfasdf')
+        print('Hi guys')

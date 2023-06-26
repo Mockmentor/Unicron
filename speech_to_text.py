@@ -1,6 +1,11 @@
 import speech_recognition as sr
+import tempfile
 
-def speech_to_text(audio: str) -> str:
-    audio_file = audio
+def speech_to_text(audio) -> str:
+
     r = sr.Recognizer()
-    return r.recognize_google(audio_file, language="ru-RU")
+    with sr.AudioFile(audio) as source:
+        audio_data = r.record(source)
+        text = r.recognize_google(audio_data)
+        print(text)
+    return text

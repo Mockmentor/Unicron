@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+service Unicron {
+    rpc audiolize (AudiolizeRequest) returns (AudiolizeResponse);
+    rpc textify (TextifyRequest) returns (TextifyResponse);
+    rpc similarity(SimilarityRequest) returns (SimilarityResponse);
+}
+
+message AudiolizeRequest {
+    string text = 1;
+}
+
+message AudiolizeResponse {
+    bytes audio = 1;
+}
+
+message TextifyRequest {
+    bytes audio = 1;
+}
+
+message TextifyResponse {
+    string text = 1;
+}
+
+message SimilarityRequest {
+    string text = 1;
+    repeated string answers = 2;
+}
+
+message SimilarityResponse {
+    double similarity = 1;
+}

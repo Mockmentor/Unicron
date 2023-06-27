@@ -5,8 +5,10 @@ WORKDIR /app
 COPY requirements.txt ./
 
 RUN apt update && \
-    apt install mecab && \
-    pip install -r requirements.txt
+    pip install tts && \
+    pip install speechrecognition && \
+    pip install sentence_transformers
+    #pip install -r requirements.txt
 
 COPY . .
 

@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  unicron:
+    build: .
+    container_name: unicron
+    ports:
+      - 9000:9000

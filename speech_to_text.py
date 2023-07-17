@@ -1,11 +1,12 @@
-import speech_recognition as sr
+import whisper
 import tempfile
 
-def speech_to_text(audio) -> str:
 
-    r = sr.Recognizer()
-    with sr.AudioFile(audio) as source:
-        audio_data = r.record(source)
-        text = r.recognize_google(audio_data)
-        print(text)
-    return text
+model = whisper.load_model("tiny")
+
+def speech_to_text(audio) -> str:
+    fd, path = tempfile.mkstemp()
+    with open(fd, 'wb') as w:
+        w.write(audio)
+        result = model.transcribe('myfile.wav')
+    return result['text']

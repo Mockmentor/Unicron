@@ -4,10 +4,12 @@ WORKDIR /app
 
 # COPY requirements.txt ./
 
-RUN apt update && \
+RUN apt-get update && \
+    apt-get install ffmpeg -y && \
     pip install tts && \
-    pip install speechrecognition && \
-    pip install sentence_transformers
+    # pip install speechrecognition && \
+    pip install sentence_transformers && \
+    pip install openai-whisper
     #pip install -r requirements.txt
 
 COPY . .

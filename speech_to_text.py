@@ -8,5 +8,5 @@ def speech_to_text(audio) -> str:
     fd, path = tempfile.mkstemp()
     with open(fd, 'wb') as w:
         w.write(audio)
-        result = model.transcribe('myfile.wav')
+        result = model.transcribe(path, language='en')
     return result['text']

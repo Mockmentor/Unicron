@@ -6,10 +6,13 @@ WORKDIR /app
 
 RUN apt-get update && \
     apt-get install ffmpeg -y && \
-    pip install tts && \
+    # pip install tts && \
     # pip install speechrecognition && \
     pip install sentence_transformers && \
-    pip install openai-whisper
+    pip install openai-whisper &&\
+    pip install grpcio &&\
+    pip install protobuf &&\
+    pip install pandas
     #pip install -r requirements.txt
 
 COPY . .

@@ -2,18 +2,13 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# COPY requirements.txt ./
-
 RUN apt-get update && \
     apt-get install ffmpeg -y && \
-    # pip install tts && \
-    # pip install speechrecognition && \
     pip install sentence_transformers && \
     pip install openai-whisper &&\
     pip install grpcio &&\
     pip install protobuf &&\
     pip install pandas
-    #pip install -r requirements.txt
 
 COPY . .
 
